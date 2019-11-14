@@ -11,13 +11,16 @@ class App extends Component {
 
   //this needs to be called when a <card /> delete button clicked
   handleDeleteClick = (id, listId) => {
-    const newCards = this.omit(this.state.allCards, id);
-    console.log(newCards);
-    const newLists = this.state.lists.filter(list => list.listId !== id);
-    console.log(newLists);
+    console.log(id,listId,'handleDeleteClick');
+    let copiedList = [...this.state.lists];
+    copiedList.forEach((list,index) => {
+      if(list.id === listId){
+        copiedList[index].cardIds = copiedList[index].cardIds.filter(cardID=>cardID!==id);
+      }
+    });
+    
     this.setState({
-      lists: newLists,
-      allCards: newCards
+      lists: copiedList
     });
   };
 
