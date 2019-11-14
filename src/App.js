@@ -10,8 +10,19 @@ class App extends Component {
 
   //this needs to be called when a <card /> delete button clicked
   handleDeleteClick = id => {
-    console.log("click");
+    const result = this.state.store.lists.map(list => list.cardIds)
+    const all = this.state.store.allCards
+    console.log(result); 
+    return this.deleteCard(all, id)
   };
+
+  deleteCard (allCards, id) {
+    return Object.entries(allCards).reduce(
+      (updatedCards, [key, value]) =>
+        key === id ? updatedCards : {...updatedCards, [key]: value},
+        {}
+    );
+  }
 
   render() {
     return (
