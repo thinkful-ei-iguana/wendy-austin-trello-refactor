@@ -3,6 +3,7 @@ import Card from "./Card";
 import "./List.css";
 
 export default function List(props) {
+  //console.log(props.listId)
   return (
     <section className="List">
       <header className="List-header">
@@ -13,6 +14,7 @@ export default function List(props) {
           <Card
             key={card.id}
             id={card.id}
+            listId={props.listId}
             title={card.title}
             content={card.content}
             onDelete={props.handleDelete}
