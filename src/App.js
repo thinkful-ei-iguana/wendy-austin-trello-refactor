@@ -10,19 +10,21 @@ class App extends Component {
   };
 
   //this needs to be called when a <card /> delete button clicked
-  handleDeleteClick = ((id, listId) => {
-    console.log(id, listId);
-    const newCards = this.state.lists.filter(list => list.cardIds !== id);
+  handleDeleteClick = (id, listId) => {
+    const newCards = this.omit(this.state.allCards, id);
+    console.log(newCards);
+    const newLists = this.state.lists.filter(list => list.listId !== id);
+    console.log(newLists);
     this.setState({
-      lists: newCards
+      lists: newLists,
+      allCards: newCards
     });
-    const newCardObj = omit(this.state.allCards, listId)
-  });
+  };
 
   omit(obj, keyToOmit) {
     return Object.entries(obj).reduce(
       (newObj, [key, value]) =>
-          key === keyToOmit ? newObj : {...newObj, [key]: value},
+        key === keyToOmit ? newObj : { ...newObj, [key]: value },
       {}
     );
   }
